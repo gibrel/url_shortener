@@ -1,0 +1,20 @@
+services:
+  mysql-local:
+    image: mysql:8.0
+    enviroment:
+      - Passsword
+      - database
+    ports:
+      - 3306:3306
+
+  demo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: demo/url-shortener
+    restart: on-failure
+    depends_on: mysql-local
+    ports:
+      - 8080:8080
+
+      
